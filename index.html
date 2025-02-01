@@ -3,40 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="icon" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjsdUViQe04x3pMyw0Yqc_w1xEPC_uy-1iWGYYOFWAQ3TrNyHRpWJUuplpUHvBVpTUVKz-IzUOpAcZaGlW1cdD7tE5rxDb0cCseJ7bopoh1zxISaNCEanqgup67IuUhGtxJD178oq0hK6N58zuZr-Zsu8yiW1mhF07JDi19_Q6Fh4_YN_cSA9qdT2sk_Dk/s320/imresizer-1738405547887.png" type="image/jpeg">
+    <link rel="icon" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjsdUViQe04x3pMyw0Yqc_w1xEPC_uy-1iWGYYOFWAQ3TrNyHRpWJUuplpUHvBVpTUVKz-IzUOpAcZaGlW1cdD7tE5rxDb0cCseJ7bopoh1zxISaNCEanqgup67IuUhGtxJD178oq0hK6N58zuZr-Zsu8yiW1mhF07JDi19_Q6Fh4_YN_cSA9qdT2sk_Dk/s320/imresizer-1738405547887.png" type="image/jpeg">
     <title>ज्योतिष आधारित शिशु नाम सुझाव</title>
     <style>
-      body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    background-image: url("https://www.trueself.com/wp-content/uploads/2024/09/8e90f70d4ac0139ed1c2f26ff391cece.gif");
-    background-size: cover; /* Makes sure the image covers the entire body */
-    background-position: center; /* Centers the background image */
-    text-align: center;
-    padding: 20px;
-    margin: 0;
-}
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            background-image: url("https://www.trueself.com/wp-content/uploads/2024/09/8e90f70d4ac0139ed1c2f26ff391cece.gif");
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+            overflow: hidden;
+        }
 
-.container {
-    max-width: 600px;
-    margin: auto;
-    border: solid 0.6px white;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
-    backdrop-filter: blur(10px); /* Add this line for the blur effect */
-}
-.container img{
-    height: 45px;
-    width: 50px;
-    border-radius: 10px;
+        .container {
+            max-width: 600px;
+            margin: auto;
+            border: solid 0.6px white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
 
-}
+        .container img {
+            height: 45px;
+            width: 50px;
+            border-radius: 10px;
+        }
+
         h2 {
             color: #ffffff;
             font-size: 24px;
             margin-bottom: 20px;
         }
+
         input, button {
             width: 100%;
             padding: 12px;
@@ -45,40 +49,53 @@
             border-radius: 10px;
             font-size: 16px;
         }
+
         button {
             background: rgb(2,0,36);
             background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
             color: white;
             font-size: 18px;
         }
+
         @media (max-width: 600px) {
             .container {
                 padding: 20px;
                 max-width: 100%;
             }
+
             h2 {
                 font-size: 20px;
             }
+
             input, button {
                 font-size: 14px;
             }
         }
 
-        #dob{
+        #dob {
             width: 90%;
         }
-        #tob{
+
+        #tob {
             width: 90%;
         }
-        #location{
+
+        #location {
             width: 90%;
         }
-        #result{
+
+        #result {
             background-color: white;
             border-radius: 10px;
             padding: 8px;
-           
-            
+        }
+
+        #loading {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
     </style>
 </head>
@@ -98,7 +115,10 @@
 
             <button type="submit">नाम सुझाएँ</button>
         </form>
-        <h3  id="result"></h3>
+        <h3 id="result"></h3>
+        <div id="loading">
+            <img src="https://mir-s3-cdn-cf.behance.net/project_modules/max_632/04de2e31234507.564a1d23645bf.gif" alt="Loading...">
+        </div>
     </div>
 
     <script>
@@ -108,9 +128,18 @@
             const tob = document.getElementById('tob').value;
             const location = document.getElementById('location').value;
 
-            const moonSign = getMoonSign(dob, tob, location);
-            const babyName = suggestBabyName(moonSign);
-            document.getElementById('result').innerText = `सुझाया गया नाम: ${babyName}`;
+            // Display loading GIF
+            document.getElementById('loading').style.display = 'block';
+
+            // Simulate a small delay before showing result
+            setTimeout(function() {
+                const moonSign = getMoonSign(dob, tob, location);
+                const babyName = suggestBabyName(moonSign);
+                document.getElementById('result').innerText = `सुझाया गया नाम: ${babyName}`;
+
+                // Hide loading GIF
+                document.getElementById('loading').style.display = 'none';
+            }, 1000); // 1 second delay for loading effect
         });
 
         function getMoonSign(dob, tob, location) {
@@ -132,9 +161,20 @@
                 "मकर": ["ओंकार", "ओजस", "ओनीर", "ओमप्रकाश", "ओवेश", "ओमर", "ओम", "ओजी", "ओलिव", "ओमाय", "ओमेश", "ओम्कार", "ओमेश", "ओमद्रव", "ओमवीर", "ओहित", "ओहिता", "ओजस्विता", "ओविश"],
                 "कुंभ": ["प्रणव", "प्रत्युष", "पलाश", "पार्थ", "पंकज", "प्रभात", "प्रोवेश", "प्रेम", "प्रकाश", "प्रांजल", "प्रदीप", "पद्म", "पिनाक्ष", "प्रकृति", "प्रल्हाद", "प्रियांश", "पिंकु", "प्रलय", "पुनित"],
                 "मीन": ["रुद्र", "ऋषि", "रोहन", "रेयांश", "राघव", "राजन", "रोहन", "रिष्क", "रहमान", "रघु", "रंजीत", "राधा", "रोहित", "रचना", "रहम", "रक्षा", "रितेश", "राखी", "राजेश", "राहुल"]
-            };
-            return namesByMoonSign[moonSign][Math.floor(Math.random() * namesByMoonSign[moonSign].length)];
+             };
+
+            const names = namesByMoonSign[moonSign];
+            return names[Math.floor(Math.random() * names.length)];
         }
+
+        // Adjust the input field when keyboard appears on mobile
+        window.addEventListener('resize', function() {
+            if (window.innerHeight < 500) {
+                document.getElementById('location').style.marginBottom = '40px';
+            } else {
+                document.getElementById('location').style.marginBottom = '10px';
+            }
+        });
     </script>
 </body>
 </html>
