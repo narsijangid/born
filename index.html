@@ -85,10 +85,48 @@
         }
 
         #result {
-            background-color: white;
-            border-radius: 10px;
-            padding: 8px;
-        }
+    position: relative;
+    background-color: white;
+    border-radius: 20px; /* Rounded corners */
+    height: 100px;
+    padding: 8px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+   
+    z-index: 1;
+}
+
+#result::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    color: white;
+    border-radius: 25px; /* Ensuring animated border is also rounded */
+    background: linear-gradient(45deg, blue, black, blue);
+    z-index: -1;
+    animation: borderAnimation 3s linear infinite;
+}
+
+@keyframes borderAnimation {
+    0% {
+        background: linear-gradient(45deg, blue, black, blue);
+    }
+    50% {
+        background: linear-gradient(45deg, black, blue, black);
+    }
+    100% {
+        background: linear-gradient(45deg, blue, black, blue);
+    }
+}
+
 
         #loading {
             display: none;
