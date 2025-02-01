@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ज्योतिष आधारित शिशु नाम सुझाव</title>
+    <style>
+      body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    background-image: url("https://www.trueself.com/wp-content/uploads/2024/09/8e90f70d4ac0139ed1c2f26ff391cece.gif");
+    background-size: cover; /* Makes sure the image covers the entire body */
+    background-position: center; /* Centers the background image */
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    border: solid 0.6px white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+    backdrop-filter: blur(10px); /* Add this line for the blur effect */
+}
+.container img{
+    height: 45px;
+    width: 50px;
+    border-radius: 10px;
+
+}
+        h2 {
+            color: #ffffff;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        input, button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+        button {
+            background: rgb(2,0,36);
+            background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+            color: white;
+            font-size: 18px;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                max-width: 100%;
+            }
+            h2 {
+                font-size: 20px;
+            }
+            input, button {
+                font-size: 14px;
+            }
+        }
+
+        #dob{
+            width: 90%;
+        }
+        #tob{
+            width: 90%;
+        }
+        #location{
+            width: 90%;
+        }
+        #result{
+            background-color: white;
+            border-radius: 10px;
+            padding: 8px;
+           
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://media.tenor.com/ow94qLGI8WsAAAAM/ai.gif" alt="">
+        <h2>भारतीय ज्योतिष अनुसार</h2>
+        <form id="babyNameForm">
+            <label style="color: white;" for="dob">जन्म तिथि:</label>
+            <input type="date" id="dob" required>
+
+            <label style="color: white;" for="tob">जन्म समय:</label>
+            <input type="time" id="tob" required>
+
+            <label style="color: white;" for="location">जन्म स्थान:</label>
+            <input type="text" id="location" required>
+
+            <button type="submit">नाम सुझाएँ</button>
+        </form>
+        <h3  id="result"></h3>
+    </div>
+
+    <script>
+        document.getElementById('babyNameForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const dob = document.getElementById('dob').value;
+            const tob = document.getElementById('tob').value;
+            const location = document.getElementById('location').value;
+
+            const moonSign = getMoonSign(dob, tob, location);
+            const babyName = suggestBabyName(moonSign);
+            document.getElementById('result').innerText = `सुझाया गया नाम: ${babyName}`;
+        });
+
+        function getMoonSign(dob, tob, location) {
+            const moonSigns = ["मेष", "वृषभ", "मिथुन", "कर्क", "सिंह", "कन्या", "तुला", "वृश्चिक", "धनु", "मकर", "कुंभ", "मीन"];
+            return moonSigns[Math.floor(Math.random() * moonSigns.length)];
+        }
+
+        function suggestBabyName(moonSign) {
+            const namesByMoonSign = {
+                "मेष": ["आरव", "अयान", "अर्णव", "अनुराग", "अद्विक", "आदित्य", "आशीष", "अंश", "अभय", "अर्जुन", "अधित्य", "अर्पित", "अध्विक", "आनंद", "अलोक", "आभा", "अंजलि", "आशा", "अविनाश", "आरा"],
+                "वृषभ": ["भाव्य", "भुवन", "वेदांत", "विनायक", "विष्णु", "बरुण", "बुद्धि", "बृजेश", "भारत", "ब्याघ्र", "बलराम", "भानु", "बागेश", "भूदेव", "बरखा", "ब्यंती", "बरखा", "बालकृष्ण", "बिन्नेश", "बादल"],
+                "मिथुन": ["चेतन", "चिराग", "चारण", "चन्द्रेश", "चैत्र", "चिरायु", "चंद्र", "चिन्मय", "चरित्र", "चरण", "चंद्रकांत", "चांदनी", "चंद्रसेन", "चिरंयु", "चरणवीर", "चंदूल", "चंदाल", "चंद्रनाथ", "चमक"],
+                "कर्क": ["हिमांश", "हिमांशु", "हिरण्या", "हरिओम", "हर्षित", "हिमराज", "हर्ष", "हिमाचल", "हिमकीर्ति", "हरीश", "हृषिकेश", "हैदर", "हर्षवर्धन", "हिसाल", "हृदयेश", "हरि", "हिम्मत", "हसमुख", "हिवत"],
+                "सिंह": ["इंद्रजीत", "ईशान", "ईरा", "एकांश", "एकलव्य", "ईश्वर", "इंद्र", "इशिता", "इशिका", "इन्द्रनील", "इशानवी", "इरा", "इन्द्रप्रस्थ", "इशिता", "इश्वरवर्धन", "इंद्रपाल", "इंद्राणि", "इन्द्रजित", "इन्द्रेश"],
+                "कन्या": ["कृष्ण", "कुणाल", "केशव", "कौशल", "कृपेश", "किरण", "कृष्णा", "काव्य", "किरो", "कनिष्का", "कांद्रिका", "कांद्रेश", "कुमार", "कृष्णानी", "कांद्रयानी", "कृष्णधन", "कवल्य", "कृष्णेश", "कन्हैया"],
+                "तुला": ["लक्ष्य", "लविश", "लोहित", "ललित", "लावण्य", "लक्ष्मी", "लाजवाब", "लवेश", "लविता", "लवीन", "लयांश", "लाविश", "लालवानी", "लक्षेंद्र", "लवेश्वर", "लविन्दर", "लामन", "लचिंदर", "ललिता"],
+                "वृश्चिक": ["मानन", "मयंक", "माधव", "महेन्द्र", "मृणाल", "मदन", "मीनाक्षी", "मिनेश", "महिमा", "महीप", "मैनका", "मधुर", "मालव", "माहेश", "मलय", "मुदित", "महेश्वर", "महालक्ष्मी", "मिनी"],
+                "धनु": ["नकुल", "निशांत", "नाव्या", "नरेश", "नवनीत", "नितेश", "निशा", "नवदर्श", "नितिन", "निहाल", "नदीम", "निरंजन", "निशिव", "नंदन", "नवगति", "नवदीप", "नयन", "निरबोध", "निलय"],
+                "मकर": ["ओंकार", "ओजस", "ओनीर", "ओमप्रकाश", "ओवेश", "ओमर", "ओम", "ओजी", "ओलिव", "ओमाय", "ओमेश", "ओम्कार", "ओमेश", "ओमद्रव", "ओमवीर", "ओहित", "ओहिता", "ओजस्विता", "ओविश"],
+                "कुंभ": ["प्रणव", "प्रत्युष", "पलाश", "पार्थ", "पंकज", "प्रभात", "प्रोवेश", "प्रेम", "प्रकाश", "प्रांजल", "प्रदीप", "पद्म", "पिनाक्ष", "प्रकृति", "प्रल्हाद", "प्रियांश", "पिंकु", "प्रलय", "पुनित"],
+                "मीन": ["रुद्र", "ऋषि", "रोहन", "रेयांश", "राघव", "राजन", "रोहन", "रिष्क", "रहमान", "रघु", "रंजीत", "राधा", "रोहित", "रचना", "रहम", "रक्षा", "रितेश", "राखी", "राजेश", "राहुल"]
+            };
+            return namesByMoonSign[moonSign][Math.floor(Math.random() * namesByMoonSign[moonSign].length)];
+        }
+    </script>
+</body>
+</html>
